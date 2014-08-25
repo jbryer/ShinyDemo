@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+README.md
+.gitignore
+.Rhistory
+ShinyDemo.dev.R
