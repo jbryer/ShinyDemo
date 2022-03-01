@@ -1,8 +1,4 @@
-if(!require(shiny) | !require(shinyIncubator) | !require(ggplot2)) {
-	install.packages(c('devtools','ggplot2','shiny'))
-	require(devtools)
-	install_github("shiny-incubator", "rstudio")
-}
+library(shiny)
 
 shinyUI(pageWithSidebar(
 	# Application title

@@ -1,11 +1,5 @@
-if(!require(devtools) | !require(shiny) | !require(shinyIncubator) | !require(ggplot2)) {
-	install.packages(c('devtools','ggplot2','shiny'))
-	require(devtools)
-	install_github("shiny-incubator", "rstudio")
-	require(shiny)
-	require(shinyIncubator)
-	require(ggplot2)
-}
+library(shiny)
+library(ggplot2)
 
 shinyServer(function(input, output) {
 	data <- reactive({
