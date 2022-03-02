@@ -2,10 +2,19 @@
 % Please edit documentation in R/ShinyDemo-package.R
 \docType{package}
 \name{ShinyDemo-package}
+\alias{ShinyDemo}
 \alias{ShinyDemo-package}
 \title{Shiny Apps as Package Demos}
 \description{
 Shiny Package Demos
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{http://github.com/jbryer/ShinyDemo}
+  \item Report bugs at \url{https://github.com/jbryer/ShinyDemo/issues}
+}
+
 }
 \author{
 \email{jason@bryer.org}

@@ -33,15 +33,21 @@ shiny_demo('gambler')
 shiny_demo('environment', 
 		   port = 2112,
 		   param = 'Hello ShinyDemo!')
+shiny_demo('df_viewer')
 shiny_demo('df_viewer',
-		   mymtcars = mtcars,
-		   myfaithful = faithful)
+		   my_mtcar = mtcars,
+		   my_faithful = faithful)
+run_shiny_app(ui = ShinyDemo::df_viewer_ui,
+			 server = ShinyDemo::df_viewer_server)
+run_shiny_app(ui = ShinyDemo::df_viewer_ui,
+			 server = ShinyDemo::df_viewer_server,
+			 my_mtcars = mtcars)
+
 
 ################################################################################
 # Setup stuff
 # Add package dependencies
-usethis::use_package('vdiffr', 
-					 type = 'Suggests')
+usethis::use_package('shiny', type = 'Imports')
 
 # Create a test
 usethis::use_test('loess-test')

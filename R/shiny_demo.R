@@ -1,36 +1,3 @@
-#' This is a wrapper to shiny::runApp to include parameters.
-#' 
-#' @param appDir the directory of the application to run.
-#' @param ... [shiny::runApp] parameters or parameters to pass to the Shiny app.
-#' @export
-run_shiny_app <- function(appDir, ...) {
-	params <- list(...)
-	shiny_params <- list()
-	if(length(params) > 0) {
-		reset_params <- list()
-		runApp_params <- names(formals(shiny::runApp))
-		shiny_params <- params[names(params) %in% runApp_params]
-		app_params <- params[!names(params) %in% runApp_params]
-		for(i in names(app_params)) {
-			if(exists(i, envir = parent.env(environment()))) {
-				reset_params[[i]] <- get(i)
-			}
-			.GlobalEnv[[i]] <- app_params[[i]]
-		}
-
-		if(length(app_params) > 0) {
-			on.exit({
-				rm(list = names(app_params), envir = .GlobalEnv)
-				for(i in names(reset_params)) {
-					.GlobalEnv[[i]] <- reset_params[[i]]
-				}
-			})
-		}
-	}
-	shiny_params$appDir <- appDir
-	do.call(runApp, shiny_params)
-}
-
 #' Run a Shiny App from a Package
 #' 
 #' \code{shiny_demo} is a user-friendly interface to running Shiny applications 

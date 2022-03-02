@@ -18,7 +18,6 @@ BugReports: https://github.com/jbryer/ShinyDemo/issues
 Depends:
     R (>= 3.0)
 Imports:
-    psych,
     shiny
 Suggests:
     devtools,
