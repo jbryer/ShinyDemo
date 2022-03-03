@@ -9,11 +9,27 @@ run_shiny_app(appDir, ui, server, ...)
 \arguments{
 \item{appDir}{the directory of the application to run.}
 
-\item{ui}{}
+\item{ui}{the Shiny ui object.}
+
+\item{server}{the Shiny server object.}
 
 \item{...}{[shiny::runApp()] parameters, [shiny::shinyApp()] parameters,
 or parameters to pass to the Shiny app.}
 }
 \description{
-This is a wrapper to shiny::runApp to include parameters.
+This function will run a Shiny app but will pass arbitrary parameters
+(NAME = VALUE) through the \code{...} parameter to the application. This
+is done by modifying the global environment. This function will attempt
+to clean up any objects placed into the global environment on exit. If
+objects exist prior to calling this function (i.e. \code{exists(OBJECT)}
+returns TRUE) then the value will be reset to it's state prior to calling
+\code{run_shiny_app}. There are instances where objects will be in the
+calling environment although they were were not prior to calling 
+\code{run_shiny_app}. Objects in the base environment will return TRUE
+from \code{exists}. For example, \code{exists('mtcars')} will always
+return TRUE even if the dataset has not been loaded yet using 
+\code{data(mtcars)}. As a result, if you call 
+\code{run_shin_app(mtcars = mtcars)} \code{mtcars} will now be in the calling
+environment. To avoid this, don't use parameter names that exist in the
+global environment (e.g. \code{run_shiny_app(my_mtcars = mtcars)}).
 }

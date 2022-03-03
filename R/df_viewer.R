@@ -13,6 +13,10 @@ df_viewer_ui <- function() {
 			tabPanel(
 				'Table',
 				dataTableOutput('df_table')
+			),
+			tabPanel(
+				'Vignette',
+				htmlOutput('vignette')
 			)
 		)
 	)
@@ -58,4 +62,9 @@ df_viewer_server <- function(input, output, session) {
 		df <- get_data()
 		return(df)
 	})
+	
+	output$vignette <- renderVignette(topic = 'ShinyDemo', 
+									  package = 'ShinyDemo', 
+									  quiet = FALSE)
+	
 }

@@ -5,7 +5,7 @@ library(usethis)
 usethis::use_tidy_description()
 
 document()
-install()
+install(build_vignettes = TRUE)
 build()
 
 # Run the tests

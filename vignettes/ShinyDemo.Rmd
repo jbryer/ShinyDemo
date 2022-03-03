@@ -1,0 +1,90 @@
+---
+title: "ShinyDemo"
+author: Jason Bryer, Ph.D.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ShinyDemo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ShinyDemo)
+```
+
+[Shiny](https://shiny.rstudio.com) applications have become a very popular and powerful way of creating interactive we applications that leverage the power of R. There are numerious ways Shiny apps can be deployed including [ShinyApps.io](https://www.shinyapps.io) or hosted services such as DigitalOcean or Amazon AWS. The [Golem](https://github.com/ThinkR-open/golem) project provides a framework for developing Shiny apps as R packages. However, with Golem, the Shiny app is the primary product. This package provides a framework for including Shiny apps where the app is designed to demonstrate the features of the package. That is, it is more like the role R package demos had before they were obfuscated by package vignettes and tests (via the [`usethis`](https://usethis.r-lib.org) package. The primary function used by package users is `shiny_demo`. Much like the build in `demo()` function, calling `shiny_demo()` without any parameters will list available Shiny demo apps in all the loaded packages. Calling `shiny_demo(topic)` will launch the Shiny app. In addition to providing a standardized structure for including Shiny demo apps within your package, it also provides functionality to allow the package user to pass parameters to the Shiny app.
+
+For the package developer, Shiny demo apps need to be placed in the `inst/shiny` folder. The `ShinyDemo::shiny_demo()` function will automatically find apps located there. 
+
+
+
+```{r, eval=FALSE}
+fluidPage(
+	titlePanel("Data Frame Viewer"),
+	uiOutput('df_select'),
+	tabsetPanel(
+		tabPanel(
+			'Structure',
+			verbatimTextOutput('df_structure')
+		),
+		tabPanel(
+			'Table',
+			dataTableOutput('df_table')
+		)
+	)
+)
+```
+
+
+```{r, eval=FALSE}
+function(input, output, session) {
+	get_data <- reactive({
+		req(input$dataframe)
+		df <- NULL
+		if(exists(input$dataframe)) {
+			df <- get(input$dataframe)
+		}
+		return(df)
+	})
+	
+	output$df_select <- renderUI({
+		ls_out <- ls_all()
+		dfs <- character()
+		for(i in ls_out) {
+			if(is.data.frame(get(i))) {
+				dfs <- c(dfs, i)
+			}
+		}
+		if(length(dfs) > 0) {
+			selectInput('dataframe', 'Select Data Frame', choices = dfs)
+		} else {
+			p('No data.frames found!')
+		}
+	})
+	
+	output$df_structure <- renderPrint({
+		df <- get_data()
+		str(df)
+	})
+	
+	output$df_table <- renderDataTable({
+		df <- get_data()
+		return(df)
+	})
+}
+```
+
+
+```{r, eval=FALSE}
+shiny_demo('df_viewer')
+shiny_demo('df_viewer',
+		   motor_trend_cars = mtcars,
+		   old_faithful = faithful)
+```

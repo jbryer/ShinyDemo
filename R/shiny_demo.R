@@ -17,6 +17,7 @@
 #' @param ... parameters passed to [shiny::runApp] or to the Shiny app itself.
 #' @author Jason Bryer (jason@bryer.org)
 #' @export
+#' @importFrom utils installed.packages str vignette
 shiny_demo <- function(topic, 
 					   package = NULL, 
 					   lib.loc = NULL, 
