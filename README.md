@@ -17,6 +17,8 @@ For package developers, simply include your Shiny apps in the `inst/shiny` direc
 ```
 library('ShinyDemo')
 shiny_demo()
-shiny_demo('gambler')
+shiny_demo('df_viewer',
+           mtcars = mtcars,
+           faithful = faithful)
 ```
 

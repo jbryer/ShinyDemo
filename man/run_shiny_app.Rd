@@ -23,13 +23,12 @@ is done by modifying the global environment. This function will attempt
 to clean up any objects placed into the global environment on exit. If
 objects exist prior to calling this function (i.e. \code{exists(OBJECT)}
 returns TRUE) then the value will be reset to it's state prior to calling
-\code{run_shiny_app}. There are instances where objects will be in the
-calling environment although they were were not prior to calling 
-\code{run_shiny_app}. Objects in the base environment will return TRUE
-from \code{exists}. For example, \code{exists('mtcars')} will always
-return TRUE even if the dataset has not been loaded yet using 
-\code{data(mtcars)}. As a result, if you call 
-\code{run_shin_app(mtcars = mtcars)} \code{mtcars} will now be in the calling
-environment. To avoid this, don't use parameter names that exist in the
-global environment (e.g. \code{run_shiny_app(my_mtcars = mtcars)}).
+\code{run_shiny_app}.
+}
+\examples{
+\dontrun{
+run_shiny_app(ui = ShinyDemo::df_viewer_ui,
+              server = ShinyDemo::df_viewer_server,
+              mtcars = mtcars)
+}
 }

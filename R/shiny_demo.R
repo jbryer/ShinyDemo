@@ -18,6 +18,12 @@
 #' @author Jason Bryer (jason@bryer.org)
 #' @export
 #' @importFrom utils installed.packages str vignette
+#' @examples
+#' \dontrun{
+#' library(ShinyDemo)
+#' shiny_demo() # this should at least return the Shiny apps in this package
+#' shiny_demo(topic = 'df_viewer', package = 'ShinyDemo')
+#' }
 shiny_demo <- function(topic, 
 					   package = NULL, 
 					   lib.loc = NULL, 
@@ -38,6 +44,7 @@ shiny_demo <- function(topic,
 	for(i in seq_along(shiny.paths)) {
 		apps <- list.dirs(shiny.paths[i], recursive=FALSE, full.names=FALSE)
 		if(length(apps) > 0) {
+			# TODO: Look for DESCRIPTION file and read using read.dcf
 			shiny.apps <- rbind(shiny.apps, data.frame(
 				package = rep(pkgs[i], length(apps)),
 				app = apps,

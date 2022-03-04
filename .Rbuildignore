@@ -4,3 +4,6 @@ README.md
 .gitignore
 .Rhistory
 ShinyDemo.dev.R
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

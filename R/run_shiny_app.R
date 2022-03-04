@@ -6,15 +6,8 @@
 #' to clean up any objects placed into the global environment on exit. If
 #' objects exist prior to calling this function (i.e. \code{exists(OBJECT)}
 #' returns TRUE) then the value will be reset to it's state prior to calling
-#' \code{run_shiny_app}. There are instances where objects will be in the
-#' calling environment although they were were not prior to calling 
-#' \code{run_shiny_app}. Objects in the base environment will return TRUE
-#' from \code{exists}. For example, \code{exists('mtcars')} will always
-#' return TRUE even if the dataset has not been loaded yet using 
-#' \code{data(mtcars)}. As a result, if you call 
-#' \code{run_shin_app(mtcars = mtcars)} \code{mtcars} will now be in the calling
-#' environment. To avoid this, don't use parameter names that exist in the
-#' global environment (e.g. \code{run_shiny_app(my_mtcars = mtcars)}).
+#' \code{run_shiny_app}. 
+#' 
 #' 
 #' @param appDir the directory of the application to run.
 #' @param ui the Shiny ui object.
@@ -22,10 +15,17 @@
 #' @param ... [shiny::runApp()] parameters, [shiny::shinyApp()] parameters,
 #'        or parameters to pass to the Shiny app.
 #' @export
+#' @examples 
+#' \dontrun{
+#' run_shiny_app(ui = ShinyDemo::df_viewer_ui,
+#'               server = ShinyDemo::df_viewer_server,
+#'               mtcars = mtcars)
+#' }
 run_shiny_app <- function(appDir, ui, server, ...) {
 	params <- list(...)
 	shinyApp_args <- list()
 	runApp_args <- list()
+	
 	if(length(params) > 0) {
 		reset_params <- list()
 		
@@ -37,7 +37,8 @@ run_shiny_app <- function(appDir, ui, server, ...) {
 		app_args <- params[!names(params) %in% c(runApp_params, shinyApp_params)]
 		
 		for(i in names(app_args)) {
-			if(exists(i, envir = parent.env(environment()))) {
+			# if(exists(i, envir = parent.env(environment()))) {
+			if(i %in% ls_all()) {
 				reset_params[[i]] <- get(i)
 			}
 			.GlobalEnv[[i]] <- app_args[[i]]

@@ -36,6 +36,13 @@ from R packages. For package developers, simply put Shiny apps in the
 \code{inst/shiny} directory in your package. This function will find any
 apps located there in the installed package.
 }
+\examples{
+\dontrun{
+library(ShinyDemo)
+shiny_demo() # this should at least return the Shiny apps in this package
+shiny_demo(topic = 'df_viewer', package = 'ShinyDemo')
+}
+}
 \author{
 Jason Bryer (jason@bryer.org)
 }

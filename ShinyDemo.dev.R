@@ -6,6 +6,7 @@ usethis::use_tidy_description()
 
 document()
 install(build_vignettes = TRUE)
+
 build()
 
 # Run the tests
@@ -35,13 +36,13 @@ shiny_demo('environment',
 		   param = 'Hello ShinyDemo!')
 shiny_demo('df_viewer')
 shiny_demo('df_viewer',
-		   my_mtcar = mtcars,
-		   my_faithful = faithful)
+		   mtcars = mtcars,
+		   faithful = faithful)
 run_shiny_app(ui = ShinyDemo::df_viewer_ui,
 			 server = ShinyDemo::df_viewer_server)
 run_shiny_app(ui = ShinyDemo::df_viewer_ui,
 			 server = ShinyDemo::df_viewer_server,
-			 my_mtcars = mtcars)
+			 mtcars = mtcars)
 
 
 ################################################################################
