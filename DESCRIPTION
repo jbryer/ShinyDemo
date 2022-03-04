@@ -1,7 +1,7 @@
 Type: Package
 Package: ShinyDemo
 Title: Shiny Apps as Package Demos
-Version: 0.9
+Version: 0.9.0
 Date: 2022-03-01
 Author: Jason Bryer <jason@bryer.org>
 Maintainer: Jason Bryer <jason@bryer.org>

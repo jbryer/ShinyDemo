@@ -1,5 +1,7 @@
 ## ShinyDemo - Package for Running Shiny Apps Like Package Demos
 
+<img src="man/figures/ShinyDemo.png" align="right" width="120" />
+
 #### Authors: Jason Bryer ([jason@bryer.org](mailto:jason@bryer.org))
 
 #### Installation
