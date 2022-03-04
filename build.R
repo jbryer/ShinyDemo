@@ -17,6 +17,8 @@ testthat::snapshot_review()
 # Build and check a package 
 check()
 
+# Release the package
+release()
 
 # Create a website using pkgdown
 library(pkgdown)

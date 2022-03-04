@@ -2,7 +2,7 @@ Type: Package
 Package: ShinyDemo
 Title: Shiny Apps as Package Demos
 Version: 0.9.0
-Date: 2022-03-01
+Date: 2022-03-04
 Author: Jason Bryer <jason@bryer.org>
 Maintainer: Jason Bryer <jason@bryer.org>
 Description: This package is designed to run Shiny apps included in
@@ -13,7 +13,7 @@ Description: This package is designed to run Shiny apps included in
     are provided to safely check for parameter values and to retrieve
     defaults if the application is run outside of the package.
 License: GPL
-URL: http://github.com/jbryer/ShinyDemo
+URL: https://jbryer.github.io/ShinyDemo/
 BugReports: https://github.com/jbryer/ShinyDemo/issues
 Depends:
     R (>= 3.0)

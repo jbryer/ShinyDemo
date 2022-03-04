@@ -2,7 +2,10 @@
 
 <img src="man/figures/ShinyDemo.png" align="right" width="120" />
 
-#### Authors: Jason Bryer ([jason@bryer.org](mailto:jason@bryer.org))
+#### Authors: Jason Bryer ([jason@bryer.org](mailto:jason@bryer.org))   
+#### Website: http://jbryer.github.io/ShinyDemo/
+
+This package is designed to run Shiny apps included in packages in the inst/shiny/ directory. In addition to providing a standardized way of running apps within packages, it extends the typical process of running Shiny apps by allowing function parameters to be passed to the application. Utility functions for the developer are provided to safely check for parameter values and to retrieve defaults if the application is run outside of the package.
 
 #### Installation
 
