@@ -7,3 +7,4 @@ ShinyDemo.dev.R
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+build.R
