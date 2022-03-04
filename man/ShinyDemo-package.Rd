@@ -11,7 +11,7 @@ Shiny Package Demos
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://github.com/jbryer/ShinyDemo}
+  \item \url{https://jbryer.github.io/ShinyDemo/}
   \item Report bugs at \url{https://github.com/jbryer/ShinyDemo/issues}
 }
 

@@ -8,3 +8,4 @@ ShinyDemo.dev.R
 ^docs$
 ^pkgdown$
 build.R
+cran-comments.md

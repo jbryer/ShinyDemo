@@ -27,6 +27,8 @@ run_shiny_app <- function(appDir, ui, server, ...) {
 	runApp_args <- list()
 	
 	if(length(params) > 0) {
+		# If any parameter in ... exists elsewhere, save the original so
+		# we can reset it on.exit.
 		reset_params <- list()
 		
 		runApp_params <- names(formals(shiny::runApp))
@@ -38,6 +40,9 @@ run_shiny_app <- function(appDir, ui, server, ...) {
 		
 		for(i in names(app_args)) {
 			# if(exists(i, envir = parent.env(environment()))) {
+			# This seems to work better since exists(mtcars), for example, will
+			# always return TRUE and therefore would be left in the environment.
+			# This lists all objects available in the call stack.
 			if(i %in% ls_all()) {
 				reset_params[[i]] <- get(i)
 			}
@@ -46,6 +51,7 @@ run_shiny_app <- function(appDir, ui, server, ...) {
 		
 		if(length(app_args) > 0) {
 			on.exit({
+				# Clean up the environment to leave it the way it was before.
 				rm(list = names(app_args), envir = .GlobalEnv)
 				for(i in names(reset_params)) {
 					.GlobalEnv[[i]] <- reset_params[[i]]

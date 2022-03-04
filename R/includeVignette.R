@@ -5,7 +5,7 @@
 #'
 #' @param topic	a character string giving the name of the vignette to include.
 #' @param package a character vector with the names of packages to search 
-#'        through, or NULL in which ‘all’ packages (as defined by argument all) 
+#'        through, or NULL in which all packages (as defined by argument all) 
 #'        are searched
 #' @export
 #' @importFrom tools file_ext
