@@ -10,7 +10,7 @@ includeVignette(topic, package)
 \item{topic}{a character string giving the name of the vignette to include.}
 
 \item{package}{a character vector with the names of packages to search 
-through, or NULL in which ‘all’ packages (as defined by argument all) 
+through, or NULL in which all packages (as defined by argument all) 
 are searched}
 }
 \description{

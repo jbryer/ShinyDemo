@@ -4,9 +4,17 @@
 \name{ShinyDemo-package}
 \alias{ShinyDemo}
 \alias{ShinyDemo-package}
-\title{Shiny Apps as Package Demos}
+\title{Shiny Applications as Package Demos}
 \description{
-Shiny Package Demos
+Shiny Applications as Package Demos
+}
+\details{
+This package is designed to run Shiny apps (Chang, et al,
+2021 <https://shiny.rstudio.com>, Wickham, 2021 <isbn:9781492047384>)
+included in packages in the inst/shiny/ directory. In addition to
+providing a standardized way of running apps from within packages, it
+extends the typical process of running apps by allowing function
+parameters to be passed to the application.
 }
 \seealso{
 Useful links:

@@ -1,17 +1,18 @@
 Type: Package
 Package: ShinyDemo
-Title: Shiny Apps as Package Demos
+Title: Shiny Applications as Package Demos
 Version: 0.9.0
 Date: 2022-03-04
-Author: Jason Bryer <jason@bryer.org>
+Author: Authors@R: c(person("Jason", "Bryer", , "jason@bryer.org", role =
+    c("aut", "cre"), comment = c(ORCID = "0000-0002-2454-0402") )
 Maintainer: Jason Bryer <jason@bryer.org>
-Description: This package is designed to run Shiny apps included in
-    packages in the inst/shiny/ directory. In addition to providing a
-    standardized way of running apps within packages, it extends the
-    typical process of running Shiny apps by allowing function parameters
-    to be passed to the application. Utility functions for the developer
-    are provided to safely check for parameter values and to retrieve
-    defaults if the application is run outside of the package.
+Description: Framework designed to run Shiny applications (Chang, et al,
+    2021 <https://shiny.rstudio.com>, Wickham, 2021 <isbn:9781492047384>)
+    included in packages, particulary for applications that are designed
+    to demostrate the features of the package. In addition to providing a
+    standardized way of running applications from within packages, it
+    extends the typical process of running applications by allowing
+    function parameters to be passed to the application.
 License: GPL
 URL: https://jbryer.github.io/ShinyDemo/
 BugReports: https://github.com/jbryer/ShinyDemo/issues

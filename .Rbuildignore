@@ -9,3 +9,4 @@ ShinyDemo.dev.R
 ^pkgdown$
 build.R
 cran-comments.md
+^CRAN-SUBMISSION$
