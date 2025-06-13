@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Shiny Applications as Package Demos • ShinyDemo</title>
+<title>Shiny Applications with Parameters • ShinyDemo</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Shiny Applications as Package Demos">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Shiny Applications with Parameters">
 <meta name="description" content="Framework designed to run Shiny applications (Chang, et al, 2021 https://shiny.rstudio.com, Wickham, 2021 ISBN:9781492047384) included in packages, particularly for applications that are designed to demonstrate the features of the package. In addition to providing a standardized way of running applications from within packages, it extends the typical process of running applications by allowing function parameters to be passed to the application.">
 <meta property="og:description" content="Framework designed to run Shiny applications (Chang, et al, 2021 https://shiny.rstudio.com, Wickham, 2021 ISBN:9781492047384) included in packages, particularly for applications that are designed to demonstrate the features of the package. In addition to providing a standardized way of running applications from within packages, it extends the typical process of running applications by allowing function parameters to be passed to the application.">
 </head>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ShinyDemo</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,8 +69,20 @@
 <p>The latest version of the <code>ShinyDemo</code> package can be installed using the `remotes`` package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'jbryer/ShinyDemo'</span><span class="op">)</span></span></code></pre></div>
-<p>For package developers, simply include your Shiny apps in the <code>inst/shiny</code> directory within your R package. The <code><a href="reference/shiny_demo.html">ShinyDemo::shiny_demo()</a></code> function will automatically find those apps.</p>
+<p>For package developers, simply include your Shiny apps in the <code>inst/</code> directory within your R package. The <code><a href="reference/shiny_demo.html">ShinyDemo::shiny_demo()</a></code> function will automatically find those apps.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jbryer.github.io/ShinyDemo/" class="external-link">'ShinyDemo'</a></span><span class="op">)</span></span>
+<span><span class="fu">ShinyDemo</span><span class="fu">::</span><span class="fu"><a href="reference/shiny_demo.html">shiny_demo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="do">##     package         app</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="do">## 1 ShinyDemo   df_viewer</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="do">## 2 ShinyDemo environment</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="do">## 3 ShinyDemo     gambler</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="do">##                                                                                      app_dir</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="do">## 1   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/ShinyDemo/df_viewer</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="do">## 2 /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/ShinyDemo/environment</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="do">## 3     /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/ShinyDemo/gambler</span></span></code></pre></div>
+<p>You can also pass arbitrary parameters to Shiny applications. The following examples passes a list of data frames to a simple <a href="https://github.com/jbryer/ShinyDemo/blob/master/R/df_viewer.R" class="external-link">data frame viewer application</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jbryer.github.io/ShinyDemo/" class="external-link">'ShinyDemo'</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"faithful"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/runAppWithParams.html">runAppWithParams</a></span><span class="op">(</span>ui <span class="op">=</span> <span class="fu">ShinyDemo</span><span class="fu">::</span><span class="va"><a href="reference/dfviewer.html">df_viewer_ui</a></span>,</span>
@@ -81,7 +93,8 @@
 <div class="section level4">
 <h4 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
 </h4>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>This package uses the <code>devtools</code> package for development.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate the package documentation</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/tidyverse.html" class="external-link">use_tidy_description</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">document</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -125,7 +138,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=ShinyDemo" class="external-link"><img src="https://www.r-pkg.org/badges/version/ShinyDemo?color=orange"></a></li>
-<li><a href="https://github.com/jbryer/ShinyDemo" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.9.1-blue.svg"></a></li>
+<li><a href="https://github.com/jbryer/ShinyDemo" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.0.0-blue.svg"></a></li>
 <li><a href="https://github.com/jbryer/ShinyDemo/actions" class="external-link"><img src="https://github.com/jbryer/ShinyDemo/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
