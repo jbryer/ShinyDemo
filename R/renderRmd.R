@@ -5,7 +5,7 @@
 #' @param path Rmarkdown file to render.
 #' @param input the input object from Shiny (optional). If provided it will be
 #'        passed to the Rmarkdown file through the environment.
-#' @paramm quiet suppress the progress bar and messages?
+#' @param quiet suppress the progress bar and messages?
 #' @param envir the environment in which the Rmarkdown code will be evaluated.
 #' @param quiet An option to suppress printing during rendering from knitr, 
 #'        pandoc command line and others. 
@@ -13,6 +13,7 @@
 #' @export
 #' @importFrom shiny HTML renderText
 #' @importFrom knitr knit2html
+#' @import rmarkdown
 renderRmd <- function(path,
 					  input,
 					  quiet = TRUE,

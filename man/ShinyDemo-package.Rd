@@ -4,13 +4,13 @@
 \name{ShinyDemo-package}
 \alias{ShinyDemo}
 \alias{ShinyDemo-package}
-\title{Shiny Applications as Package Demos}
+\title{Shiny Applications with Parameters}
 \description{
-Shiny Applications as Package Demos
+Shiny Applications with Parameters
 }
 \details{
 This package is designed to run Shiny apps (Chang, et al,
-2021 <https://shiny.rstudio.com>, Wickham, 2021 <isbn:9781492047384>)
+2021 https://shiny.rstudio.com> Wickham, 2021 isbn:9781492047384)
 included in packages in the inst/shiny/ directory. In addition to
 providing a standardized way of running apps from within packages, it
 extends the typical process of running apps by allowing function
@@ -25,7 +25,8 @@ Useful links:
 
 }
 \author{
-\email{jason@bryer.org}
+\strong{Maintainer}: Jason Bryer \email{jason@bryer.org} (\href{https://orcid.org/0000-0002-2454-0402}{ORCID})
+
 }
 \keyword{package}
 \keyword{shiny}

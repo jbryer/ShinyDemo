@@ -2,21 +2,24 @@
 % Please edit documentation in R/shiny_demo.R
 \name{shiny_demo}
 \alias{shiny_demo}
-\title{Run a Shiny App from a Package}
+\alias{print.shinyapplist}
+\title{Find and run Shiny applications from R package}
 \usage{
 shiny_demo(
   topic,
-  package = NULL,
-  lib.loc = NULL,
+  package,
+  lib.loc = .libPaths(),
   verbose = getOption("verbose"),
-  includeAllInstalled = FALSE,
+  include.installed = FALSE,
   ...
 )
+
+\method{print}{shinyapplist}(x, ...)
 }
 \arguments{
 \item{topic}{the topic/app which should be run.}
 
-\item{package}{the package which contains the app to run. If \code{NULL} the 
+\item{package}{the package which contains the app to run. If `NULL` the 
 first app with the given topic name will be run.}
 
 \item{lib.loc}{a character vector of directory names of R libraries, or NULL.
@@ -25,24 +28,26 @@ the default is used, the loaded packages are searched before the libraries.}
 
 \item{verbose}{a logical. If TRUE, additional diagnostics are printed.}
 
-\item{includeAllInstalled}{a logical. If TRUE and topic not specified, all
-Shiny apps from all installed packages will be listed.}
+\item{include.installed}{search installed packages for Shiny applications. If `FALSE` only
+loaded packages will be searched.}
 
-\item{...}{parameters passed to [shiny::runApp] or to the Shiny app itself.}
+\item{...}{other parameters passed to `print()`.}
+
+\item{x}{results from [shiny_demo()].}
+}
+\value{
+if `topic` is not specified this will return a data frame listing all the Shiny
+  applications found.
 }
 \description{
-\code{shiny_demo} is a user-friendly interface to running Shiny applications 
-from R packages. For package developers, simply put Shiny apps in the
-\code{inst/shiny} directory in your package. This function will find any
-apps located there in the installed package.
+`shiny_demo()` is a user-friendly interface to finding and running Shiny applications 
+from R packages. For package developers, simply put Shiny apps in thec`inst/` directory in 
+your package. This function will find any apps located there from loaded package.
 }
 \examples{
-\dontrun{
+if(interactive()) {
 library(ShinyDemo)
 shiny_demo() # this should at least return the Shiny apps in this package
 shiny_demo(topic = 'df_viewer', package = 'ShinyDemo')
 }
-}
-\author{
-Jason Bryer (jason@bryer.org)
 }

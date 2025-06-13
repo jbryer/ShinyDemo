@@ -1,36 +1,34 @@
 Type: Package
 Package: ShinyDemo
 Title: Shiny Applications as Package Demos
-Version: 0.9.0
-Date: 2022-03-04
-Authors@R: c(
-    person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"), 
-           comment = c(ORCID = "0000-0002-2454-0402") )
-  )
+Version: 0.9.1
+Date: 2025-06-13
+Authors@R: 
+    person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-2454-0402"))
 Maintainer: Jason Bryer <jason@bryer.org>
 Description: Framework designed to run Shiny applications (Chang, et al,
-    2021 <https://shiny.rstudio.com>, Wickham, 2021 <isbn:9781492047384>)
+    2021 https://shiny.rstudio.com, Wickham, 2021 ISBN:9781492047384)
     included in packages, particularly for applications that are designed
     to demonstrate the features of the package. In addition to providing a
     standardized way of running applications from within packages, it
     extends the typical process of running applications by allowing
     function parameters to be passed to the application.
-
 License: GPL
 URL: https://jbryer.github.io/ShinyDemo/
 BugReports: https://github.com/jbryer/ShinyDemo/issues
 Depends:
     R (>= 3.0)
 Imports:
+    DT,
     knitr,
     rmarkdown,
     shiny
 Suggests:
-    devtools,
-    testthat (>= 3.0.0)
+    devtools
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyLoad: yes
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2

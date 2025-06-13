@@ -1,83 +1,110 @@
-#' Run a Shiny App from a Package
+#' Find and run Shiny applications from R package
 #' 
-#' \code{shiny_demo} is a user-friendly interface to running Shiny applications 
-#' from R packages. For package developers, simply put Shiny apps in the
-#' \code{inst/shiny} directory in your package. This function will find any
-#' apps located there in the installed package.
+#' `shiny_demo()` is a user-friendly interface to finding and running Shiny applications 
+#' from R packages. For package developers, simply put Shiny apps in thec`inst/` directory in 
+#' your package. This function will find any apps located there from loaded package.
 #' 
+#' @rdname shiny_demo
 #' @param topic the topic/app which should be run.
-#' @param package the package which contains the app to run. If \code{NULL} the 
+#' @param package the package which contains the app to run. If `NULL` the 
 #'   first app with the given topic name will be run.
 #' @param lib.loc a character vector of directory names of R libraries, or NULL.
 #'   The default value of NULL corresponds to all libraries currently known. If
 #'   the default is used, the loaded packages are searched before the libraries.
 #' @param verbose a logical. If TRUE, additional diagnostics are printed.
-#' @param includeAllInstalled a logical. If TRUE and topic not specified, all
-#'   Shiny apps from all installed packages will be listed.
-#' @param ... parameters passed to [shiny::runApp] or to the Shiny app itself.
-#' @author Jason Bryer (jason@bryer.org)
+#' @param include.installed search installed packages for Shiny applications. If `FALSE` only
+#'   loaded packages will be searched.
+#' @param ... parameters passed to [shiny::runApp()].
+#' @return if `topic` is not specified this will return a data frame listing all the Shiny
+#'   applications found.
 #' @export
-#' @importFrom utils installed.packages str vignette
+#' @importFrom utils str vignette
+#' @importFrom shiny runApp
 #' @examples
-#' \dontrun{
+#' if(interactive()) {
 #' library(ShinyDemo)
 #' shiny_demo() # this should at least return the Shiny apps in this package
 #' shiny_demo(topic = 'df_viewer', package = 'ShinyDemo')
 #' }
 shiny_demo <- function(topic, 
-					   package = NULL, 
-					   lib.loc = NULL, 
+					   package, 
+					   lib.loc = .libPaths(), 
 					   verbose = getOption("verbose"),
-					   includeAllInstalled = FALSE, 
+					   include.installed = FALSE,
 					   ...) {
-	paths <- find.package(package, lib.loc, verbose = verbose)
-	if(includeAllInstalled & missing(topic)) {
-		installed <- installed.packages()[,'Package']
-		paths <- find.package(installed, lib.loc, verbose = verbose)
+	paths <- NULL
+	if(include.installed) {
+		paths <- c()
+		for(i in lib.loc) {
+			paths <- c(paths, list.dirs(i, recursive = FALSE))
+		}
+	} else {
+		loaded <- search()
+		loaded <- loaded[grep('^package:', loaded)]
+		loaded <- sapply(strsplit(loaded, ':'), FUN = function(x) { x[2] })
+		paths <- find.package(loaded)
 	}
-	
 	pkgs <- basename(paths)
 	
-	# List available shiny demos
 	shiny.apps <- data.frame()
-	shiny.paths <- file.path(paths, "shiny")
-	for(i in seq_along(shiny.paths)) {
-		apps <- list.dirs(shiny.paths[i], recursive=FALSE, full.names=FALSE)
-		if(length(apps) > 0) {
-			# TODO: Look for DESCRIPTION file and read using read.dcf
-			shiny.apps <- rbind(shiny.apps, data.frame(
-				package = rep(pkgs[i], length(apps)),
-				app = apps,
-				stringsAsFactors=FALSE
-			))
+	for(i in paths) {
+		pkg <- basename(i)
+		dirs <- list.dirs(i)
+		for(j in dirs) {
+			# j <- dirs[241]
+			if(any(c('app.r', 'server.r', 'ui.r') %in% tolower(list.files(j)))) {
+				shiny.apps <- rbind(
+					shiny.apps,
+					data.frame(
+						package = pkg,
+						app = basename(j),
+						app_dir = j,
+						stringsAsFactors = FALSE
+					)
+				)
+			}
 		}
 	}
 	
 	if(missing(topic)) {
 		if(nrow(shiny.apps) > 0) {
-			#message(shiny.apps, row.names=FALSE)
+			class(shiny.apps) <- c('shinyapplist', 'data.frame')
 			return(shiny.apps)
 		} else {
-			warning('No Shiny apps found in loaded packages.')
+			message('No Shiny apps found in loaded packages.')
 			invisible()
 		}
-	} else { #Run the shiny app
-		if(is.null(package)) { # find the package containing the topic
+	} else { # Run the shiny app
+		if(missing(package)) { # find the package containing the topic
 			pos <- which(shiny.apps$app == topic)
 			if(length(pos) == 0) {
-				stop(paste0(topic, ' app not found in a loaded package.'))
-			} else if(length(pos) > 1) {
-				warning(paste0(topic, ' named app found in more than one package. ',
-							   'Running app from ', pkgs[pos[1]], ' package.'))
-			}
+				stop(paste0(topic, ' app not found in a ',
+							ifelse(include.installed, 'installed', 'loaded'), ' package.'))
+			} 
 			package <- shiny.apps[pos[1],]$package
 		}
+		pos <- which(shiny.apps$app == topic & shiny.apps$package == package)
+		if(length(pos) > 1) {
+			warning(paste0(topic, ' named app found in more than one package. ',
+						   'Running app from ', package, ' package.'))
+		} else if(length(pos) == 0) {
+			stop(paste0(topic, ' app not found in a ',
+						ifelse(include.installed, 'installed', 'loaded'), ' package.'))
+		}
 		message(paste0('Running ', topic, ' app from the ', package, ' package'))
-		app.path <- file.path(path.package(package), 'shiny', topic)
+		app.path <- shiny.apps[pos[1],]$app_dir
 		tryCatch({
-			# shiny::runApp(app.path)
-			run_shiny_app(appDir = app.path, ...)
-		}, finally=print("App finished"))
+			shiny::runApp(appDir = app.path, ...)
+		}, finally = print("App finished"))
 		invisible()
 	}
+}
+
+#' Print the Shiny app name and package.
+#' @param x results from [shiny_demo()].
+#' @param ... other parameters passed to `print()`.
+#' @rdname shiny_demo
+#' @method print shinyapplist
+print.shinyapplist <- function(x, ...) {
+	print(as.data.frame(x[,1:2]), ...)
 }

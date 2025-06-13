@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-README.md
 .gitignore
 .Rhistory
 ShinyDemo.dev.R
@@ -10,3 +9,5 @@ ShinyDemo.dev.R
 build.R
 cran-comments.md
 ^CRAN-SUBMISSION$
+^\.github$
+README.Rmd
