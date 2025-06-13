@@ -1,0 +1,18 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/ShinyDemo.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/ShinyDemo-package.html</loc></url>
+<url><loc>/reference/dfviewer.html</loc></url>
+<url><loc>/reference/includeVignette.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/ls_all.html</loc></url>
+<url><loc>/reference/renderRmd.html</loc></url>
+<url><loc>/reference/renderVignette.html</loc></url>
+<url><loc>/reference/runAppWithParams.html</loc></url>
+<url><loc>/reference/shiny_demo.html</loc></url>
+</urlset>
+
