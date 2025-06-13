@@ -1,7 +1,7 @@
 Type: Package
 Package: ShinyDemo
-Title: Shiny Applications as Package Demos
-Version: 0.9.1
+Title: Shiny Applications with Parameters
+Version: 1.0.0
 Date: 2025-06-13
 Authors@R: 
     person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),

@@ -27,7 +27,14 @@ The latest version of the `ShinyDemo` package can be installed using the `remote
 remotes::install_github('jbryer/ShinyDemo')
 ```
 
-For package developers, simply include your Shiny apps in the `inst/shiny` directory within your R package. The `ShinyDemo::shiny_demo()` function will automatically find those apps.
+For package developers, simply include your Shiny apps in the `inst/` directory within your R package. The `ShinyDemo::shiny_demo()` function will automatically find those apps.
+
+```{r}
+library('ShinyDemo')
+ShinyDemo::shiny_demo()
+```
+
+You can also pass arbitrary parameters to Shiny applications. The following examples passes a list of data frames to a simple [data frame viewer application](https://github.com/jbryer/ShinyDemo/blob/master/R/df_viewer.R). 
 
 ```{r, eval=FALSE}
 library('ShinyDemo')
@@ -39,6 +46,8 @@ runAppWithParams(ui = ShinyDemo::df_viewer_ui,
 ```
 
 #### Development
+
+This package uses the `devtools` package for development.
 
 ```{r, eval=FALSE}
 # Generate the package documentation
